@@ -1,0 +1,87 @@
+{{> layout}}
+
+{{#content}}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>{{#item.itemID}}Edit{{/item.itemID}}{{^item.itemID}}New{{/item.itemID}} Item</h1>
+    <a href="/items" class="btn btn-secondary">
+        <i class="bi bi-arrow-left"></i> Back to Items
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form action="/items/save" method="post">
+            {{#item.itemID}}
+            <input type="hidden" name="itemID" value="{{item.itemID}}">
+            {{/item.itemID}}
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="contactPerson" class="form-label">Contact Person*</label>
+                    <select class="form-select" id="contactPerson" name="contactPerson.contactPersonKey" required>
+                        <option value="">Select Contact Person</option>
+                        {{#contacts}}
+                        <option value="{{contactPersonKey}}" {{#selected}}selected{{/selected}}>
+                            {{firstName}} {{lastName}}
+                        </option>
+                        {{/contacts}}
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="company" class="form-label">Company*</label>
+                    <select class="form-select" id="company" name="company.companyKey" required>
+                        <option value="">Select Company</option>
+                        {{#companies}}
+                        <option value="{{companyKey}}" {{#selected}}selected{{/selected}}>
+                            {{companyName}}
+                        </option>
+                        {{/companies}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="awardName" class="form-label">Award Name*</label>
+                    <input type="text" class="form-control" id="awardName" name="awardName" value="{{item.awardName}}" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="dateOfOrder" class="form-label">Date of Order*</label>
+                    <input type="date" class="form-control" id="dateOfOrder" name="dateOfOrder" value="{{item.dateOfOrder}}" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="previousFileName" class="form-label">Previous File Name</label>
+                <input type="text" class="form-control" id="previousFileName" name="previousFileName" value="{{item.previousFileName}}">
+            </div>
+
+            <div class="mb-3">
+                <label for="machineUsed" class="form-label">Machine Used</label>
+                <input type="text" class="form-control" id="machineUsed" name="machineUsed" value="{{item.machineUsed}}">
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="shippingCost" class="form-label">Shipping Cost</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" step="0.01" class="form-control" id="shippingCost" name="shippingCost" value="{{item.shippingCost}}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="retailPrice" class="form-label">Retail Price*</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" step="0.01" class="form-control" id="retailPrice" name="retailPrice" value="{{item.retailPrice}}" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Save Item</button>
+            </div>
+        </form>
+    </div>
+</div>
+{{/content}}

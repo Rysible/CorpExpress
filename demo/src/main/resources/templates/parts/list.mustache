@@ -1,0 +1,50 @@
+{{> layout}}
+
+{{#content}}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Parts</h1>
+    <a href="/parts/new" class="btn btn-primary">
+        <i class="bi bi-plus"></i> Add New Part
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Supplier</th>
+                        <th>Cost</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#parts}}
+                    <tr>
+                        <td>{{partKey}}</td>
+                        <td>{{partSupplier}}</td>
+                        <td>${{partCost}}</td>
+                        <td>
+                            <a href="/parts/edit/{{partKey}}" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="/parts/delete/{{partKey}}" class="btn btn-sm btn-danger"
+                               onclick="return confirm('Are you sure you want to delete this part?')">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {{/parts}}
+                    {{^parts}}
+                    <tr>
+                        <td colspan="4" class="text-center">No parts found</td>
+                    </tr>
+                    {{/parts}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{{/content}}

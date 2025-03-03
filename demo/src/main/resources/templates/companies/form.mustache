@@ -1,0 +1,34 @@
+{{> layout}}
+
+{{#content}}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>{{#company.companyKey}}Edit{{/company.companyKey}}{{^company.companyKey}}New{{/company.companyKey}} Company</h1>
+    <a href="/companies" class="btn btn-secondary">
+        <i class="bi bi-arrow-left"></i> Back to Companies
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form action="/companies/save" method="post">
+            {{#company.companyKey}}
+            <input type="hidden" name="companyKey" value="{{company.companyKey}}">
+            {{/company.companyKey}}
+
+            <div class="mb-3">
+                <label for="companyName" class="form-label">Company Name*</label>
+                <input type="text" class="form-control" id="companyName" name="companyName" value="{{company.companyName}}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="companyAddress" class="form-label">Company Address</label>
+                <textarea class="form-control" id="companyAddress" name="companyAddress" rows="3">{{company.companyAddress}}</textarea>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Save Company</button>
+            </div>
+        </form>
+    </div>
+</div>
+{{/content}}
