@@ -1,5 +1,5 @@
 
-package cmanagment.model;
+package managment.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
