@@ -1,0 +1,14 @@
+/Users/jameswills/Downloads/vcs/CorpExpress/src/main/java/com/corpexpressions/App.java
+/Users/jameswills/Downloads/vcs/CorpExpress/src/main/java/com/corpexpressions/controllers/WebController.java
+/Users/jameswills/Downloads/vcs/CorpExpress/src/main/java/com/corpexpressions/dao/Company.java
+/Users/jameswills/Downloads/vcs/CorpExpress/src/main/java/com/corpexpressions/dao/ContactPerson.java
+/Users/jameswills/Downloads/vcs/CorpExpress/src/main/java/com/corpexpressions/dao/DataBaseUtil.java
+/Users/jameswills/Downloads/vcs/CorpExpress/src/main/java/com/corpexpressions/entity/CompanyRepository.java
+/Users/jameswills/Downloads/vcs/CorpExpress/src/main/java/com/corpexpressions/entity/ContactPersonRepository.java
+/Users/jameswills/Downloads/vcs/CorpExpress/src/main/java/com/corpexpressions/entity/Item.java
+/Users/jameswills/Downloads/vcs/CorpExpress/src/main/java/com/corpexpressions/entity/ItemRepository.java
+/Users/jameswills/Downloads/vcs/CorpExpress/src/main/java/com/corpexpressions/entity/Part.java
+/Users/jameswills/Downloads/vcs/CorpExpress/src/main/java/com/corpexpressions/entity/PartItemLink.java
+/Users/jameswills/Downloads/vcs/CorpExpress/src/main/java/com/corpexpressions/entity/PartItemLinkId.java
+/Users/jameswills/Downloads/vcs/CorpExpress/src/main/java/com/corpexpressions/entity/PartItemLinkRepository.java
+/Users/jameswills/Downloads/vcs/CorpExpress/src/main/java/com/corpexpressions/entity/PartRepository.java

@@ -1,0 +1,14 @@
+com/corpexpressions/dao/DataBaseUtil.class
+com/corpexpressions/entity/PartItemLink.class
+com/corpexpressions/entity/Part.class
+com/corpexpressions/entity/ItemRepository.class
+com/corpexpressions/entity/PartItemLinkRepository.class
+com/corpexpressions/entity/Item.class
+com/corpexpressions/App.class
+com/corpexpressions/controllers/WebController.class
+com/corpexpressions/dao/ContactPerson.class
+com/corpexpressions/entity/CompanyRepository.class
+com/corpexpressions/entity/PartItemLinkId.class
+com/corpexpressions/entity/PartRepository.class
+com/corpexpressions/entity/ContactPersonRepository.class
+com/corpexpressions/dao/Company.class
