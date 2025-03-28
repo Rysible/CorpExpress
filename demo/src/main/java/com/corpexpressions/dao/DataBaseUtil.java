@@ -1,4 +1,4 @@
-package managment.model;
+package com.corpexpressions.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

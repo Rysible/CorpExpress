@@ -1,4 +1,4 @@
-package managment.model;
+package com.corpexpressions.entity;
 
 import jakarta.persistence.Embeddable;
 import lombok.Data;

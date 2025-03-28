@@ -1,7 +1,7 @@
 // mvn spring-boot:run -Dspring-boot.run.jvmArguments='-Dserver.port=8081'
 
 
-package managment.model;
+package com.corpexpressions.controllers;
 
 // import com.example.ordermanagement.model.*;
 // import com.example.ordermanagement.repository.*;
@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.corpexpressions.entity.*;
 
 import java.util.List;
 import java.util.Optional;

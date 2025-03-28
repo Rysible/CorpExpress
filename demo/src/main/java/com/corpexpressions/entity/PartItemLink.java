@@ -1,5 +1,5 @@
 
-package managment.model;
+package com.corpexpressions.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
