@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./Header.css"; // Ensure you have this CSS file
 
 const Header = () => {
     return (
@@ -6,13 +7,13 @@ const Header = () => {
             <div className="logo">
                 <Link to="/">CorpExpress</Link>
             </div>
-            <ul className="nav-links">
-                <li><Link to="/contacts">Contacts</Link></li>
-                <li><Link to="/companies">Companies</Link></li>
-                <li><Link to="/orders">Orders</Link></li>
-                <li><Link to="/parts">Parts</Link></li>
-                <li><Link to="/reports">Reports</Link></li>
-            </ul>
+            <div className="nav-buttons">
+                <Link to="/contacts" className="nav-btn">Contacts</Link>
+                <Link to="/companies" className="nav-btn">Companies</Link>
+                <Link to="/orders" className="nav-btn">Orders</Link>
+                <Link to="/parts" className="nav-btn">Parts</Link>
+                <Link to="/reports" className="nav-btn">Reports</Link>
+            </div>
         </nav>
     );
 };

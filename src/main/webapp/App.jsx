@@ -1,6 +1,11 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
+import Contacts from "./pages/Contacts";
+import Reports from "./pages/Reports"; // Add this if you have a reports page
+import Orders from "./pages/Orders"; // Add this if you have an orders page
+import Companies from "./pages/Companies"; // Add this if you have a companies page
+import Parts from "./pages/Parts"; // Add this if you have a parts page
 
 const App = () => {
     return (
@@ -8,11 +13,11 @@ const App = () => {
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/contacts" element={<h1>Contacts Page</h1>} />
-                <Route path="/companies" element={<h1>Companies Page</h1>} />
-                <Route path="/orders" element={<h1>Orders Page</h1>} />
-                <Route path="/parts" element={<h1>Parts Page</h1>} />
-                <Route path="/reports" element={<h1>Reports Page</h1>} />
+                <Route path="/contacts" element={<Contacts />} />
+                <Route path="/reports" element={<Reports />} />
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/companies" element={<Companies />} />
+                <Route path="/parts" element={<Parts />} />
             </Routes>
         </Router>
     );
