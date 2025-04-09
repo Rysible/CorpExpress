@@ -6,6 +6,7 @@ import Reports from "./pages/Reports"; // Add this if you have a reports page
 import Orders from "./pages/Orders"; // Add this if you have an orders page
 import Companies from "./pages/Companies"; // Add this if you have a companies page
 import Parts from "./pages/Parts"; // Add this if you have a parts page
+import AddOrder from "./pages/AddOrder";
 
 const App = () => {
     return (
@@ -18,6 +19,7 @@ const App = () => {
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/companies" element={<Companies />} />
                 <Route path="/parts" element={<Parts />} />
+                <Route path="/addorder" element={<AddOrder />} />
             </Routes>
         </Router>
     );

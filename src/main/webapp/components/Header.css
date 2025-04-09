@@ -15,6 +15,10 @@
     text-decoration: none;
 }
 
+.logo a:hover {
+    color: #3498db;
+}
+
 /* Horizontal Navigation Buttons */
 .nav-buttons {
     display: flex;
