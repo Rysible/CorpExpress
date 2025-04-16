@@ -10,7 +10,7 @@ public class DataBaseUtil {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 myConnection = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:33306/project2", "root", "mysqlpass");
+                        "jdbc:mysql://localhost:3306/CorporateExpressionsDatabase", "root", "root");
             } catch (Exception e) {
                 System.out.println(e);
             }
