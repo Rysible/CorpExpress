@@ -1,10 +1,11 @@
 package com.corpexpressions.dao;
 
+import com.corpexpressions.entity.Item;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
-import java.util.List;
 
-import com.corpexpressions.entity.Item;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,5 +23,6 @@ public class Company {
     private String companyAddress;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    @JsonManagedReference // handles parent side of relationship
     private List<Item> items;
 }
