@@ -1,17 +1,36 @@
-version: '3.8'
+version: '3'
 services:
   mysql:
     image: mysql:8.0
-    container_name: CorporateExpressionsDatabase
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: CorporateExpressionsDatabase
-      MYSQL_USER: CorporateExpressionsDatabase
-      MYSQL_PASSWORD: root
     ports:
       - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: P@ssw0rd
+      MYSQL_USER: product_user
+      MYSQL_PASSWORD: product_user_password
+      MYSQL_DATABASE: product
     volumes:
-      - mysql_data:/var/lib/mysql
-    command: --default-authentication-plugin=mysql_native_password
+      - mysql-data:/var/lib/mysql
+
+  spring-boot-app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/product
+      SPRING_DATASOURCE_USERNAME: product_user
+      SPRING_DATASOURCE_PASSWORD: product_user_password
+
+  react-app:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+
 volumes:
-  mysql_data:
+  mysql-data:
