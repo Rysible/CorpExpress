@@ -24,12 +24,13 @@ public class OrderController {
 
     @PostMapping("/add")
     public Order save(@RequestBody Order order) {
-        // Optional: fetch company/contact from DB if needed
         if (order.getCompany() != null && order.getCompany().getId() != null) {
-            order.setCompany(companyRepository.findById(order.getCompany().getId()).orElseThrow());
+            Long companyId = order.getCompany().getId();
+            order.setCompany(companyRepository.findById(companyId).orElseThrow());
         }
         if (order.getContact() != null && order.getContact().getId() != null) {
-            order.setContact(contactRepository.findById(order.getContact().getId()).orElseThrow());
+            Long contactId = order.getContact().getId();
+            order.setContact(contactRepository.findById(contactId).orElseThrow());
         }
         return orderService.save(order);
     }

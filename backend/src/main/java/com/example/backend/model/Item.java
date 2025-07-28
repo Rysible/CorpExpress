@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.example.backend.dao.Company;
-import com.example.backend.dao.ContactPerson;
+import com.example.backend.model.Company;
+import com.example.backend.model.Contact;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,8 +28,8 @@ public class Item {
     private Integer itemID;
 
     @ManyToOne
-    @JoinColumn(name = "ContactPersonKey")
-    private ContactPerson contactPerson;
+    @JoinColumn(name = "ContactKey")
+    private Contact contact;
 
     @ManyToOne
     @JoinColumn(name = "CompanyKey")
