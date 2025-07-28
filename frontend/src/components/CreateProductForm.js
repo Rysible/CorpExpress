@@ -20,7 +20,7 @@ export default function CreateProductForm() {
       const newProduct = {
         title: titleRef.current.value,
         price: priceRef.current.value,
-        quantity: quantityRef.current.value
+        quantity: quantityRef.current.valueF
       };
 
       console.log(newProduct)

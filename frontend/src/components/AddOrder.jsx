@@ -1,67 +1,78 @@
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./AddOrder.css";
+import { useNavigate } from "react-router-dom";
+import { createCompany, createContact, createOrder } from "../services/ApiService";
 
 const AddOrder = () => {
-    const [formData, setFormData] = useState({
-        contactFirstName: "",
-        contactLastName: "",
-        contactEmail: "",
-        contactPhone: "",
-        companyName: "",
-        companyAddress: "",
-        machineUsed: "",
-        awardName: "",
-        shippingCost: "",
-        retailPrice: "",
-        parts: [{ partSupplier: "", partCost: "" }],
-    });
+    const navigate = useNavigate();
 
-    const handleChange = (e, index = null) => {
-        const { name, value } = e.target;
+    const contactFirstNameRef = useRef();
+    const contactLastNameRef = useRef();
+    const contactEmailRef = useRef();
+    const contactPhoneRef = useRef();
+    const companyNameRef = useRef();
+    const companyAddressRef = useRef();
+    const machineUsedRef = useRef();
+    const awardNameRef = useRef();
+    const shippingCostRef = useRef();
+    const retailPriceRef = useRef();
 
-        if (index !== null) {
-            const updatedParts = [...formData.parts];
-            updatedParts[index][name] = value;
-            setFormData({ ...formData, parts: updatedParts });
-        } else {
-            setFormData({ ...formData, [name]: value });
-        }
-    };
+    const [_, setForceUpdate] = useState(0);
+    const partsRefs = useRef([
+        { partSupplier: React.createRef(), partCost: React.createRef() }
+    ]);
 
     const addPart = () => {
-        setFormData({ ...formData, parts: [...formData.parts, { partSupplier: "", partCost: "" }] });
+        partsRefs.current.push({
+            partSupplier: React.createRef(),
+            partCost: React.createRef()
+        });
+        setForceUpdate((n) => n + 1);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:8080/api/orders/add", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
-            });
+            // Create contact first
+            const contact = {
+                firstName: contactFirstNameRef.current.value,
+                lastName: contactLastNameRef.current.value,
+                email: contactEmailRef.current.value,
+                phone: contactPhoneRef.current.value
+            };
+            const savedContact = await createContact(contact);
 
-            if (response.ok) {
-                alert("Order added successfully!");
-                setFormData({
-                    contactFirstName: "",
-                    contactLastName: "",
-                    contactEmail: "",
-                    contactPhone: "",
-                    companyName: "",
-                    companyAddress: "",
-                    machineUsed: "",
-                    awardName: "",
-                    shippingCost: "",
-                    retailPrice: "",
-                    parts: [{ partSupplier: "", partCost: "" }],
-                });
-            } else {
-                alert("Error adding order.");
-            }
+            // Create company
+            const company = {
+                name: companyNameRef.current.value,
+                address: companyAddressRef.current.value
+            };
+            const savedCompany = await createCompany(company);
+
+            // Collect parts
+            const parts = partsRefs.current.map((refs) => ({
+                partSupplier: refs.partSupplier.current.value,
+                partCost: parseFloat(refs.partCost.current.value)
+            }));
+
+            // Create order using contact + company IDs
+            const newOrder = {
+                machineUsed: machineUsedRef.current.value,
+                awardName: awardNameRef.current.value,
+                shippingCost: parseFloat(shippingCostRef.current.value),
+                retailPrice: parseFloat(retailPriceRef.current.value),
+                contact: { id: savedContact.id },
+                company: { id: savedCompany.id },
+                parts
+            };
+
+            const response = await createOrder(newOrder);
+            alert("Order added successfully!");
+            navigate(`/orders/${response.id}`);
         } catch (error) {
-            console.error("Error submitting form:", error);
+            console.error("Error creating order:", error);
+            alert("Error adding order.");
         }
     };
 
@@ -71,35 +82,35 @@ const AddOrder = () => {
             <form onSubmit={handleSubmit} className="order-form">
                 <h2>Contact Information</h2>
                 <div className="form-group">
-                    <input type="text" name="contactFirstName" placeholder="First Name" value={formData.contactFirstName} onChange={handleChange} required />
-                    <input type="text" name="contactLastName" placeholder="Last Name" value={formData.contactLastName} onChange={handleChange} required />
+                    <input ref={contactFirstNameRef} type="text" placeholder="First Name" required />
+                    <input ref={contactLastNameRef} type="text" placeholder="Last Name" required />
                 </div>
                 <div className="form-group">
-                    <input type="email" name="contactEmail" placeholder="Email" value={formData.contactEmail} onChange={handleChange} required />
-                    <input type="text" name="contactPhone" placeholder="Phone Number" value={formData.contactPhone} onChange={handleChange} required />
+                    <input ref={contactEmailRef} type="email" placeholder="Email" required />
+                    <input ref={contactPhoneRef} type="text" placeholder="Phone Number" required />
                 </div>
 
                 <h2>Company Details</h2>
                 <div className="form-group">
-                    <input type="text" name="companyName" placeholder="Company Name" value={formData.companyName} onChange={handleChange} required />
-                    <input type="text" name="companyAddress" placeholder="Company Address" value={formData.companyAddress} onChange={handleChange} required />
+                    <input ref={companyNameRef} type="text" placeholder="Company Name" required />
+                    <input ref={companyAddressRef} type="text" placeholder="Company Address" required />
                 </div>
 
                 <h2>Order Details</h2>
                 <div className="form-group">
-                    <input type="text" name="machineUsed" placeholder="Machine Used" value={formData.machineUsed} onChange={handleChange} required />
-                    <input type="text" name="awardName" placeholder="Award Name" value={formData.awardName} onChange={handleChange} required />
+                    <input ref={machineUsedRef} type="text" placeholder="Machine Used" required />
+                    <input ref={awardNameRef} type="text" placeholder="Award Name" required />
                 </div>
                 <div className="form-group">
-                    <input type="number" name="shippingCost" placeholder="Shipping Cost" value={formData.shippingCost} onChange={handleChange} required />
-                    <input type="number" name="retailPrice" placeholder="Retail Price" value={formData.retailPrice} onChange={handleChange} required />
+                    <input ref={shippingCostRef} type="number" placeholder="Shipping Cost" required />
+                    <input ref={retailPriceRef} type="number" placeholder="Retail Price" required />
                 </div>
 
                 <h2>Parts</h2>
-                {formData.parts.map((part, index) => (
+                {partsRefs.current.map((refPair, index) => (
                     <div key={index} className="form-group">
-                        <input type="text" name="partSupplier" placeholder="Part Supplier" value={part.partSupplier} onChange={(e) => handleChange(e, index)} required />
-                        <input type="number" name="partCost" placeholder="Part Cost" value={part.partCost} onChange={(e) => handleChange(e, index)} required />
+                        <input ref={refPair.partSupplier} type="text" placeholder="Part Supplier" required />
+                        <input ref={refPair.partCost} type="number" placeholder="Part Cost" required />
                     </div>
                 ))}
                 <button type="button" className="add-part-btn" onClick={addPart}>+ Add Another Part</button>

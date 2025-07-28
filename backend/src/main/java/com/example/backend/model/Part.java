@@ -1,25 +1,24 @@
 package com.example.backend.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import java.math.BigDecimal;
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
 @Entity
-@Table(name = "Part")
+@Getter
+@Setter
 public class Part {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer partKey;
+    private Long id;
 
-    @Column(precision = 10, scale = 2)
-    private BigDecimal partCost;
+    @ManyToOne
+    @JoinColumn(name = "company_id") // company_id in Part table
+    private Company company;
+    private Double partCost;
 
-    @Column(length = 255)
-    private String partSupplier;
-
-    @OneToMany(mappedBy = "part")
-    private List<PartItemLink> partItemLinks;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 }
