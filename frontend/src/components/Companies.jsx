@@ -45,8 +45,8 @@ export default function Companies() {
                     {companies.map(company => (
                         <tr key={company.id}>
                             <td>{company.id}</td>
-                            <td>{company.name}</td>
-                            <td>{company.address}</td>
+                            <td>{company.companyName}</td>
+                            <td>{company.companyAddress}</td>
                         </tr>
                     ))}
                 </tbody>

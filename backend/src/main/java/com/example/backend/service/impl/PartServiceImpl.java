@@ -23,7 +23,7 @@ public class PartServiceImpl implements PartService {
     public Part updateById(Long id, Part part) {
         Part managedPart = this.findById(id);
         managedPart.setPartCost(part.getPartCost());
-        managedPart.setPartSupplier(part.getPartSupplier());
+        managedPart.setCompany(part.getCompany());
         return this.save(managedPart);
     }
 

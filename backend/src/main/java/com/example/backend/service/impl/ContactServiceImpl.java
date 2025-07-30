@@ -24,8 +24,9 @@ public class ContactServiceImpl implements ContactService {
         Contact managedContact = this.findById(id);
         managedContact.setFirstName(contact.getFirstName());
         managedContact.setLastName(contact.getLastName());
-        managedContact.setPhoneNumber(contact.getPhoneNumber());
-        managedContact.setEmailAddress(contact.getEmailAddress());
+        managedContact.setPhone(contact.getPhone());
+        managedContact.setEmail(contact.getEmail());
+
         return this.save(managedContact);
     }
 

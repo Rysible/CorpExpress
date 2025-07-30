@@ -46,7 +46,7 @@ export default function Parts() {
                         <tr key={part.id}>
                             <td>{part.id}</td>
                             <td>${part.cost.toFixed(2)}</td>
-                            <td>{part.supplier}</td>
+                            <td>{part.company}</td>
                         </tr>
                     ))}
                 </tbody>
